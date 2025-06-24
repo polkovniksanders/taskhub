@@ -1,10 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-    --color-primary: #806DF2;
+@theme {
+    --color-primary: #806DF2
 }
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 html {
     font-size: 16px;
@@ -15,7 +15,7 @@ html, body {
 }
 
 body {
-    @apply bg-gradient-to-t from-[#F3EEFF] to-[#F6F5FF] dark:from-[#1a1a1a] dark:to-[#121212] text-[#2a2a2a] dark:text-[#f5f5ft]
+    @apply bg-gradient-to-t from-[#F3EEFF] to-[#F6F5FF] dark:from-[#1a1a1a] dark:to-[#121212] text-[#2a2a2a] dark:text-[#f5f5ff];
     color: #2A2A2A;
     min-width: 320px;
     min-height: 100vh;
