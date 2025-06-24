@@ -10,9 +10,7 @@ export default function SidebarProjects() {
           <li key={project.name} className='flex items-center gap-2'>
             <div className={cn(project.color, 'w-3 h-3')} />
 
-            <span className={'text-neutral-500 dark:text-white'}>
-              {project.name}
-            </span>
+            <span className={'text-neutral-500 dark:text-white'}>{project.name}</span>
           </li>
         ))}
       </ul>

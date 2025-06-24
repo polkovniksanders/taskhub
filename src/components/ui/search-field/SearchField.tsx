@@ -5,11 +5,7 @@ interface SearchProps {
   value: string;
   onChange: (value: string) => void;
 }
-export default function SearchField({
-  placeholder = 'Search',
-  value,
-  onChange,
-}: SearchProps) {
+export default function SearchField({ placeholder = 'Search', value, onChange }: SearchProps) {
   return (
     <div
       className={
