@@ -12,8 +12,7 @@ import {
 } from '@/app/dashboard/project-chart/project-chart-data';
 import Chart from '@/app/dashboard/project-chart/Chart';
 
-const PERIOD_KEYS = ['yearly', 'month', 'week', 'day'] as const;
-type PeriodKey = (typeof PERIOD_KEYS)[number];
+type PeriodKey = 'yearly' | 'month' | 'week' | 'day';
 
 export default function ProjectChart() {
   const [selectRange, setSelectRange] = useState<TimeRageProps>({
