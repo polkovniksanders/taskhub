@@ -26,12 +26,7 @@ export default function ThemeToggle() {
 
   return (
     <div className={'mt-3.5 fixed right-8 bottom-8 z-50 cursor-pointer'}>
-      <button
-        /*className={
-          'p-2 rounded-full dark:text-white bg-neutral-200 text-neutral-800 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors'
-        }*/
-        onClick={handleClick}
-      >
+      <button onClick={handleClick}>
         <Lottie
           lottieRef={lottieRef}
           animationData={themeSwitcher}

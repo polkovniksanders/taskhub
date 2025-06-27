@@ -12,7 +12,7 @@ export default function ProjectStatCard({ projectStat }: ProjectStatCardProps) {
     <div className={cn(projectStat.bgColor, 'rounded-2xl p-4 relative overflow-hidden')}>
       <div className={'flex items-center justify-between relative z-10'}>
         <div className={'flex flex-col'}>
-          <span className={'text-4xl font-semibold mb-1'}>
+          <span className={'text-4xl   font-semibold mb-1'}>
             {projectStat.id === 3 ? formatMinutes(projectStat.number) : projectStat.number}
           </span>
           <span className={'text-sm'}>{projectStat.label}</span>
