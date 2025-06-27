@@ -1,4 +1,5 @@
 export interface ProjectsProps {
-  color: string;
-  name: string;
+  color?: string;
+  label: string;
+  href: string;
 }

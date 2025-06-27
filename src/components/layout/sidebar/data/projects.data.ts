@@ -3,22 +3,27 @@ import type { ProjectsProps } from '@/shared/interfaces/components/projects.inte
 export const PROJECTS: ProjectsProps[] = [
   {
     color: 'bg-purple-600',
-    name: 'Project Alpha',
+    label: 'Project Alpha',
+    href: '',
   },
   {
     color: 'bg-pink-300',
-    name: 'Project Beta',
+    label: 'Project Beta',
+    href: '',
   },
   {
     color: 'bg-yellow-300',
-    name: 'Project Gamma',
+    label: 'Project Gamma',
+    href: '',
   },
   {
     color: 'bg-orange-400',
-    name: 'Project Delta',
+    label: 'Project Delta',
+    href: '',
   },
   {
     color: 'bg-teal-600',
-    name: 'Project Epsilon',
+    label: 'Project Epsilon',
+    href: '',
   },
 ];

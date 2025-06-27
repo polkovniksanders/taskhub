@@ -1,10 +1,32 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
-    --color-primary: #806DF2
+
+:root {
+    --foreground: #2a2a2a;
+    --background: #f5f5f5;
+    --primary: #806DF2;
+    --bg-gradient: linear-gradient(to top, #F3EEFF, #F6F5FF)
 }
 
-@custom-variant dark (&:where(.dark, .dark *));
+.dark {
+  --foreground: #f5f5f5;
+  --background: #121212;
+    --bg-gradient: linear-gradient(to top, #1a1a1a, #121212);
+}
+
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-primary: var(--primary);
+}
+
+@layer base {
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
 
 html {
     font-size: 16px;
@@ -15,7 +37,8 @@ html, body {
 }
 
 body {
-    @apply bg-gradient-to-t from-[#F3EEFF] to-[#F6F5FF] dark:from-[#1a1a1a] dark:to-[#121212] text-[#2a2a2a] dark:text-[#f5f5ff];
+    background: var(--color-background);
+    color: var(--color-foreground);
     min-width: 320px;
     min-height: 100vh;
 }

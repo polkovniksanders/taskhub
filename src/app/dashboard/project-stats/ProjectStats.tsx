@@ -1,4 +1,4 @@
-import { PROJECT_STATS_DATA } from '@/app/dashboard/data/projects-stat.data';
+import { PROJECT_STATS_DATA } from '@/app/dashboard/project-stats/data/projects-stat.data';
 import ProjectStatCard from '@/app/dashboard/project-stats/ProjectStatCard';
 
 export default function ProjectStats() {

@@ -1,18 +1,78 @@
-import { PROFILE } from '@/components/layout/sidebar/data/profile.data';
-import { ChevronDown } from 'lucide-react';
+'use client';
+
+import { useEffect, useMemo, useRef, useState } from 'react';
+import Dropdown from '@/components/ui/dropdown/Dropdown';
+import { generateUsers } from '@/app/users.data';
+import Image from 'next/image';
+import Chevron from '@/components/ui/chevron/Chevron';
+
+type UserDropdownItem = {
+  label: string;
+  value: string;
+  id: string;
+  email: string;
+  image: string;
+};
 
 export default function SidebarProfile() {
+  const [isOpen, setIsOpen] = useState(false);
+  const anchorRef = useRef<HTMLDivElement>(null);
+
+  const USERS = useMemo(() => generateUsers(9), []);
+
+  const [currentUser, selectCurrentUser] = useState<UserDropdownItem | null>(null);
+
+  useEffect(() => {
+    if (USERS.length > 0) {
+      const randomIndex = Math.floor(Math.random() * USERS.length);
+      const randomUser = USERS[randomIndex];
+      selectCurrentUser({
+        label: randomUser.name,
+        value: randomUser.email,
+        ...randomUser,
+      });
+    }
+  }, [USERS]);
+
+  const handleSelectUser = (item: UserDropdownItem) => {
+    selectCurrentUser({ ...item });
+  };
+
+  if (!currentUser) return null;
+
   return (
-    <div className='mb-10 flex items-center gap-2.5'>
-      <div className='w-8 h-8 bg-primary rounded-full shrink-0' />
+    <div
+      ref={anchorRef}
+      onClick={() => setIsOpen(!isOpen)}
+      className='relative cursor-pointer flex items-center gap-2.5 pl-2'
+    >
+      <Dropdown<UserDropdownItem>
+        onSelect={handleSelectUser}
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+        list={USERS.map(user => ({
+          label: user.name,
+          value: user.email,
+          ...user,
+        }))}
+        anchorRef={anchorRef}
+      />
+
+      <Image
+        className='rounded-2xl'
+        width={32}
+        height={32}
+        src={currentUser.image || ''}
+        alt={currentUser.label}
+      />
 
       <div className='leading-snug'>
-        <div className='font-medium'>{PROFILE.name}</div>
-        <div className='opacity-60 text-xs font-medium'>{PROFILE.email}</div>
+        <div className='font-medium'>{currentUser?.label}</div>
+        <div className='opacity-60 text-xs font-medium'>{currentUser?.value}</div>
       </div>
 
       <div className='ml-1'>
-        <ChevronDown size={16} className='opacity-60' />
+        <Chevron isOpen={isOpen} size={16} />
       </div>
     </div>
   );
