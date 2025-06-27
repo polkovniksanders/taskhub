@@ -4,6 +4,7 @@ import Heading from '@/components/ui/Heading';
 import SearchField from '@/components/ui/search-field/SearchField';
 import React from 'react';
 import ProjectStats from '@/app/dashboard/project-stats/ProjectStats';
+import ProjectChart from '@/app/dashboard/project-chart/ProjectChart';
 
 export default function Dashboard() {
   return (
@@ -16,11 +17,11 @@ export default function Dashboard() {
 
         <div className={'grid grid-cols-[25%_75%] gap-6'}>
           <ProjectStats />
-          <div> CHART </div>
+          <ProjectChart />
         </div>
       </div>
 
-      <div className={'p-5 bg-violet-300 h-screen flex items-center justify-center'}>CHAT</div>
+      <div className={'p-5  h-screen flex items-center justify-center'}>CHAT</div>
     </div>
   );
 }
