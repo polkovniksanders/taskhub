@@ -9,7 +9,7 @@ export default function LastTasks() {
 
       <div
         className={
-          'grid grid-cols-3 xl:grid-cols-2 2xl-grid-cols-3 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6'
+          'grid grid-cols-3 xl:grid-cols-3 2xl-grid-cols-3 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6'
         }
       >
         {TASKS.map(task => (
