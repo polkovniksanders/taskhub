@@ -5,6 +5,7 @@ import Dropdown from '@/components/ui/dropdown/Dropdown';
 import { generateUsers } from '@/app/users.data';
 import Image from 'next/image';
 import Chevron from '@/components/ui/chevron/Chevron';
+import { useSidebar } from '@/hooks/useSidebar';
 
 type UserDropdownItem = {
   label: string;
@@ -17,6 +18,7 @@ type UserDropdownItem = {
 export default function SidebarProfile() {
   const [isOpen, setIsOpen] = useState(false);
   const anchorRef = useRef<HTMLDivElement>(null);
+  const { isSidebarOpen } = useSidebar();
 
   const USERS = useMemo(() => generateUsers(9), []);
 
@@ -44,7 +46,7 @@ export default function SidebarProfile() {
     <div
       ref={anchorRef}
       onClick={() => setIsOpen(!isOpen)}
-      className='relative cursor-pointer flex items-center gap-2.5 pl-2'
+      className='relative cursor-pointer flex items-center gap-2.5'
     >
       <Dropdown<UserDropdownItem>
         onSelect={handleSelectUser}
@@ -66,14 +68,18 @@ export default function SidebarProfile() {
         alt={currentUser.label}
       />
 
-      <div className='leading-snug'>
-        <div className='font-medium'>{currentUser?.label}</div>
-        <div className='opacity-60 text-xs font-medium'>{currentUser?.value}</div>
-      </div>
+      {isSidebarOpen && (
+        <div className='leading-snug'>
+          <div className='font-medium'>{currentUser?.label}</div>
+          <div className='opacity-60 text-xs font-medium'>{currentUser?.value}</div>
+        </div>
+      )}
 
-      <div className='ml-1'>
-        <Chevron isOpen={isOpen} size={16} />
-      </div>
+      {isSidebarOpen && (
+        <div className='ml-1'>
+          <Chevron isOpen={isOpen} size={16} />
+        </div>
+      )}
     </div>
   );
 }

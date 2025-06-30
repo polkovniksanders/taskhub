@@ -1,19 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { useSidebarActive } from '@/hooks/useSidebarActive';
+import { useSidebar } from '@/hooks/useSidebar';
 import type { MenuProps } from '@/shared/interfaces/components/menu.interface';
-import { useSelector } from 'react-redux';
 import cn from 'clsx';
 import type { ProjectsProps } from '@/shared/interfaces/components/projects.interface';
-import { selectSidebarState } from '@/store/sidebarSlice';
 
 interface SidebarMenuItem extends MenuProps, ProjectsProps {}
 
 export default function SidebarMenuItem({ item }: { item: SidebarMenuItem }) {
-  const isActive = useSidebarActive(item.href);
-
-  const open = useSelector(selectSidebarState);
+  const { isSidebarItemActive, isSidebarOpen } = useSidebar(item.href);
 
   return (
     <li>
@@ -29,8 +25,8 @@ export default function SidebarMenuItem({ item }: { item: SidebarMenuItem }) {
           </span>
         )}
 
-        {open && (
-          <span className={`ml-4 ${isActive ? 'text-primary font-semibold' : ''}`}>
+        {isSidebarOpen && (
+          <span className={`ml-4 ${isSidebarItemActive ? 'text-primary font-semibold' : ''}`}>
             {item.label}
           </span>
         )}
