@@ -27,6 +27,16 @@
     }
 }
 
+@keyframes stripes-move {
+    100% {
+        background-position: 40px 0;
+    }
+}
+.bg-stripes-animate {
+    animation: stripes-move 1s linear infinite;
+    background-size: 40px 40px; /* подберите под pattern */
+}
+
 
 html {
     font-size: 16px;

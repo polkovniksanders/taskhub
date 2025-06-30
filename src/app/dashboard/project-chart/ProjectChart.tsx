@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ProjectChartHeader from '@/app/dashboard/project-chart/ProjectChartHeader';
 import type {
   ChartDataPoint,
-  TimeRageProps,
+  TimeRangeProps,
 } from '@/app/dashboard/project-chart/project-chart.interface';
 import {
   dailyData,
@@ -11,17 +11,18 @@ import {
   yearlyData,
 } from '@/app/dashboard/project-chart/data/project-chart-data';
 import Chart from '@/app/dashboard/project-chart/Chart';
+import Card from '@/components/ui/card/Card';
 
-type PeriodKey = 'yearly' | 'month' | 'week' | 'day';
+type PeriodKey = 'year' | 'month' | 'week' | 'day';
 
 export default function ProjectChart() {
-  const [selectRange, setSelectRange] = useState<TimeRageProps>({
+  const [selectRange, setSelectRange] = useState<TimeRangeProps>({
     label: 'Yearly',
-    value: 'yearly',
+    value: 'year',
   });
 
   const dataByPeriod: Record<PeriodKey, ChartDataPoint[]> = {
-    yearly: yearlyData,
+    year: yearlyData,
     month: monthlyData,
     week: weeklyData,
     day: dailyData,
@@ -30,9 +31,9 @@ export default function ProjectChart() {
   const chartData = dataByPeriod[selectRange.value as PeriodKey] || [];
 
   return (
-    <div className={'h-full bg-white dark:bg-neutral-900 p-5 rounded-2xl'}>
+    <Card>
       <ProjectChartHeader period={selectRange} onChange={setSelectRange} />
       <Chart data={chartData} />
-    </div>
+    </Card>
   );
 }

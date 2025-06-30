@@ -7,6 +7,7 @@ import ProjectStats from '@/app/dashboard/project-stats/ProjectStats';
 import ProjectChart from '@/app/dashboard/project-chart/ProjectChart';
 import LastTasks from '@/app/dashboard/last-tasks/LastTasks';
 import Chat from '@/app/dashboard/chat/Chat';
+import TodayTasks from '@/app/dashboard/today-tasks/TodayTasks';
 
 export default function Dashboard() {
   return (
@@ -23,6 +24,8 @@ export default function Dashboard() {
         </div>
 
         <LastTasks />
+
+        <TodayTasks />
       </div>
 
       <div className='flex items-start justify-center min-h-[200px] lg:h-screen'>

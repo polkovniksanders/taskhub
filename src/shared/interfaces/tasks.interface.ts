@@ -15,4 +15,6 @@ export interface TaskProps extends Omit<SubTaskProps, 'isDone'> {
   comments: string[];
   resources: string[];
   links: string[];
+  start?: number;
+  end?: number;
 }

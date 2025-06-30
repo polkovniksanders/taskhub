@@ -3,13 +3,17 @@
 import Link from 'next/link';
 import { useSidebarActive } from '@/hooks/useSidebarActive';
 import type { MenuProps } from '@/shared/interfaces/components/menu.interface';
+import { useSelector } from 'react-redux';
 import cn from 'clsx';
 import type { ProjectsProps } from '@/shared/interfaces/components/projects.interface';
+import { selectSidebarState } from '@/store/sidebarSlice';
 
 interface SidebarMenuItem extends MenuProps, ProjectsProps {}
 
 export default function SidebarMenuItem({ item }: { item: SidebarMenuItem }) {
   const isActive = useSidebarActive(item.href);
+
+  const open = useSelector(selectSidebarState);
 
   return (
     <li>
@@ -25,7 +29,11 @@ export default function SidebarMenuItem({ item }: { item: SidebarMenuItem }) {
           </span>
         )}
 
-        <span className={`ml-4 ${isActive ? 'text-primary font-semibold' : ''}`}>{item.label}</span>
+        {open && (
+          <span className={`ml-4 ${isActive ? 'text-primary font-semibold' : ''}`}>
+            {item.label}
+          </span>
+        )}
 
         {item.label === 'Messages' && (
           <span className='ml-auto text-primary bg-[#DCDEF6] rounded-lg px-2 text-xs font-medium'>
