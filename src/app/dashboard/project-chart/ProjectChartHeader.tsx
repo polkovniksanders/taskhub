@@ -1,25 +1,27 @@
 import { useRef, useState } from 'react';
-import type { TimeRageProps } from '@/app/dashboard/project-chart/project-chart.interface';
+import type { TimeRangeProps } from '@/app/dashboard/project-chart/project-chart.interface';
 import { timeRanges } from '@/app/dashboard/project-chart/data/project-chart-data';
 import Chevron from '@/components/ui/chevron/Chevron';
 import Dropdown from '@/components/ui/dropdown/Dropdown';
+import SubTitle from '@/components/ui/typography/SubTitle';
 
 interface ProjectChartHeaderProps {
-  onChange: (range: TimeRageProps) => void;
-  period: TimeRageProps;
+  onChange: (range: TimeRangeProps) => void;
+  period: TimeRangeProps;
 }
 export default function ProjectChartHeader({ onChange, period }: ProjectChartHeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const anchorRef = useRef<HTMLDivElement>(null);
 
-  const rangeChange = (range: TimeRageProps) => {
+  const rangeChange = (range: TimeRangeProps) => {
     onChange(range);
     setIsOpen(false);
   };
 
   return (
     <div className='flex items-center justify-between mb-6'>
-      <h2 className='text-xl font-medium'>Projects Statistic</h2>
+      <SubTitle title={'Projects Statistic'} />
+
       <div className='relative' ref={anchorRef}>
         <button
           onClick={() => setIsOpen(!isOpen)}

@@ -1,4 +1,4 @@
-export interface TimeRageProps {
+export interface TimeRangeProps {
   label: string;
   value: string;
 }

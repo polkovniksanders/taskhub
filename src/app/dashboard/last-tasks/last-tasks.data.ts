@@ -1,5 +1,5 @@
 import type { TaskProps } from '@/shared/interfaces/tasks.interface';
-import { ShoppingBasket, Plane, Umbrella } from 'lucide-react';
+import { Beef, Hamburger, IceCreamBowl } from 'lucide-react';
 import { generateUsers } from '@/app/users.data';
 
 export const TASKS: TaskProps[] = [
@@ -10,8 +10,10 @@ export const TASKS: TaskProps[] = [
     comments: ['comment 1', 'comment 2', 'comment 3'],
     resources: [''],
     links: ['http://localhost:8080/dashboard', 'http://localhost:8080/dashboard'],
-    icon: Plane,
+    icon: Beef,
     users: generateUsers(3, 6),
+    start: 10,
+    end: 12,
     subtasks: [
       {
         id: '1',
@@ -27,9 +29,11 @@ export const TASKS: TaskProps[] = [
     dueDate: new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000),
     comments: ['1', '2', '3'],
     resources: ['', '', '', ''],
-    links: [''],
-    icon: ShoppingBasket,
+    links: ['http://localhost:8080/dashboard'],
+    icon: Hamburger,
     users: generateUsers(2, 8),
+    start: 10,
+    end: 12,
     subtasks: [
       {
         id: '1',
@@ -50,9 +54,11 @@ export const TASKS: TaskProps[] = [
     dueDate: new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000),
     comments: ['1', '3'],
     resources: ['', '', ''],
-    links: [''],
-    icon: Umbrella,
+    links: ['http://localhost:8080/dashboard'],
+    icon: IceCreamBowl,
     users: generateUsers(4, 10),
+    start: 10,
+    end: 12,
     subtasks: [
       {
         id: '1',
@@ -67,7 +73,7 @@ export const TASKS: TaskProps[] = [
       {
         id: '3',
         title: 'subtask 3',
-        isDone: true,
+        isDone: false,
       },
     ],
   },
