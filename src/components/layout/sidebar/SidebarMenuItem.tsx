@@ -21,7 +21,10 @@ export default function SidebarMenuItem({ item }: { item: SidebarMenuItem }) {
 
         {item.icon && (
           <span className='flex items-center gap-2'>
-            <item.icon size={20} />
+            <item.icon
+              color={isSidebarItemActive ? 'var(--color-primary)' : 'var(--color-neutral-500)'}
+              size={20}
+            />
           </span>
         )}
 
@@ -32,7 +35,7 @@ export default function SidebarMenuItem({ item }: { item: SidebarMenuItem }) {
         )}
 
         {item.label === 'Messages' && (
-          <span className='ml-auto text-primary bg-[#DCDEF6] rounded-lg px-2 text-xs font-medium'>
+          <span className=' text-primary bg-[#DCDEF6] rounded-lg ml-4 px-2 text-xs font-medium'>
             4
           </span>
         )}
