@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { MessageSquareMore, Link, Image as IconImage } from 'lucide-react';
 
@@ -6,6 +8,7 @@ import TaskFooterIcons from '@/app/dashboard/last-tasks/TaskFooterIcons';
 import TaskActions from '@/app/dashboard/last-tasks/TaskActions';
 import LastTaskProgress from '@/app/dashboard/last-tasks/LastTaskProgress';
 import Card from '@/components/ui/card/Card';
+import LastTaskIcon from '@/app/dashboard/last-tasks/LastTaskIcon';
 
 export default function Task({ task }: { task: TaskProps }) {
   const completedCount = task.subtasks.filter(item => item.isDone).length;
@@ -16,14 +19,10 @@ export default function Task({ task }: { task: TaskProps }) {
     <Card>
       <div className='flex items-start justify-between gap-2 sm:gap-0'>
         <div className='flex gap-2 sm:gap-3 items-center'>
-          <div className='bg-primary/20 rounded-full p-2 sm:p-3 flex items-center justify-center'>
-            <task.icon className='w-5 h-5 sm:w-6 sm:h-6 text-primary' />
-          </div>
+          <LastTaskIcon status={task.status} />
           <div>
             <div className='font-semibold text-base sm:text-lg leading-5'>{task.title}</div>
-            <div className='text-gray-400 text-xs sm:text-sm mt-1'>
-              Due : {Math.ceil((+task.dueDate - Date.now()) / (1000 * 60 * 60 * 24))} days
-            </div>
+            <div className='text-gray-400 text-xs sm:text-sm mt-1'>Due : {+task.dueDate} days</div>
           </div>
         </div>
         <div className='flex -space-x-2 sm:-space-x-3'>

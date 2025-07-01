@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import ProjectChartHeader from '@/app/dashboard/project-chart/ProjectChartHeader';
-import type {
-  ChartDataPoint,
-  TimeRangeProps,
-} from '@/app/dashboard/project-chart/project-chart.interface';
+import type { ChartDataPoint } from '@/app/dashboard/project-chart/project-chart.interface';
 import {
   dailyData,
   monthlyData,
@@ -12,11 +9,12 @@ import {
 } from '@/app/dashboard/project-chart/data/project-chart-data';
 import Chart from '@/app/dashboard/project-chart/Chart';
 import Card from '@/components/ui/card/Card';
+import type { DropdownProps } from '@/shared/interfaces/commone.interface';
 
 type PeriodKey = 'year' | 'month' | 'week' | 'day';
 
 export default function ProjectChart() {
-  const [selectRange, setSelectRange] = useState<TimeRangeProps>({
+  const [selectRange, setSelectRange] = useState<DropdownProps>({
     label: 'Yearly',
     value: 'year',
   });

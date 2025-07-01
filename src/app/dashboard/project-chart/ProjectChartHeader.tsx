@@ -1,19 +1,19 @@
 import { useRef, useState } from 'react';
-import type { TimeRangeProps } from '@/app/dashboard/project-chart/project-chart.interface';
 import { timeRanges } from '@/app/dashboard/project-chart/data/project-chart-data';
 import Chevron from '@/components/ui/chevron/Chevron';
 import Dropdown from '@/components/ui/dropdown/Dropdown';
 import SubTitle from '@/components/ui/typography/SubTitle';
+import type { DropdownProps } from '@/shared/interfaces/commone.interface';
 
 interface ProjectChartHeaderProps {
-  onChange: (range: TimeRangeProps) => void;
-  period: TimeRangeProps;
+  onChange: (range: DropdownProps) => void;
+  period: DropdownProps;
 }
 export default function ProjectChartHeader({ onChange, period }: ProjectChartHeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const anchorRef = useRef<HTMLDivElement>(null);
 
-  const rangeChange = (range: TimeRangeProps) => {
+  const rangeChange = (range: DropdownProps) => {
     onChange(range);
     setIsOpen(false);
   };

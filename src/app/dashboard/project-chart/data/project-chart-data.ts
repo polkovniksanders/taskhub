@@ -1,7 +1,5 @@
-import type {
-  ChartDataPoint,
-  TimeRangeProps,
-} from '@/app/dashboard/project-chart/project-chart.interface';
+import type { ChartDataPoint } from '@/app/dashboard/project-chart/project-chart.interface';
+import type { DropdownProps } from '@/shared/interfaces/commone.interface';
 
 export const yearlyData: ChartDataPoint[] = [
   { period: 'Jan', value: 1500 },
@@ -63,7 +61,7 @@ export const dailyData: ChartDataPoint[] = [
   { period: '23:00', value: 400 },
 ];
 
-export const timeRanges: TimeRangeProps[] = [
+export const timeRanges: DropdownProps[] = [
   { label: 'Yearly', value: 'year' },
   { label: 'Monthly', value: 'month' },
   { label: 'Weekly', value: 'week' },

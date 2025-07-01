@@ -1,4 +1,3 @@
-import type { LucideIcon } from 'lucide-react';
 import type { ProfileProps } from '@/shared/interfaces/profile.interface';
 
 export interface SubTaskProps {
@@ -7,10 +6,12 @@ export interface SubTaskProps {
   isDone: boolean;
 }
 
+export type TaskStatus = 'done' | 'progress' | 'not-start' | 'all';
+
 export interface TaskProps extends Omit<SubTaskProps, 'isDone'> {
-  icon: LucideIcon;
-  dueDate: Date;
+  dueDate: number;
   users: ProfileProps[];
+  status: TaskStatus;
   subtasks: SubTaskProps[];
   comments: string[];
   resources: string[];
