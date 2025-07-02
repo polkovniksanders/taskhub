@@ -5,6 +5,7 @@ import { filters } from '@/app/dashboard/last-tasks/data/last-tasks.data';
 import type { DropdownProps } from '@/shared/interfaces/commone.interface';
 import { setStatusFilter } from '@/store/tasksSlice';
 import { useAppDispatch } from '@/store';
+import SecondaryButton from '@/components/ui/buttons/SecondaryButton';
 
 export default function LastTasksFilter() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,19 +25,11 @@ export default function LastTasksFilter() {
 
   return (
     <div>
-      <div
-        style={{
-          marginLeft: '300px',
-        }}
-        className='relative'
-        ref={anchorRef}
-      >
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className='flex cursor-pointer items-center gap-2 px-3 py-1.5 text-sm rounded-2xl border border-neutral-200'
-        >
+      <div className='relative' ref={anchorRef}>
+        <SecondaryButton onClick={() => setIsOpen(!isOpen)}>
           {currentFilter.label} <Chevron isOpen={isOpen} size={16} />
-        </button>
+        </SecondaryButton>
+
         <Dropdown
           anchorRef={anchorRef}
           onSelect={filterTasks}

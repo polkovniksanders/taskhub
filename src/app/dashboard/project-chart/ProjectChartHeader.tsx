@@ -4,6 +4,7 @@ import Chevron from '@/components/ui/chevron/Chevron';
 import Dropdown from '@/components/ui/dropdown/Dropdown';
 import SubTitle from '@/components/ui/typography/SubTitle';
 import type { DropdownProps } from '@/shared/interfaces/commone.interface';
+import SecondaryButton from '@/components/ui/buttons/SecondaryButton';
 
 interface ProjectChartHeaderProps {
   onChange: (range: DropdownProps) => void;
@@ -23,12 +24,10 @@ export default function ProjectChartHeader({ onChange, period }: ProjectChartHea
       <SubTitle title={'Projects Statistic'} />
 
       <div className='relative' ref={anchorRef}>
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className='flex cursor-pointer items-center gap-2 px-3 py-1.5 text-sm rounded-2xl border border-neutral-200'
-        >
-          {period.label} <Chevron isOpen={isOpen} size={16} />
-        </button>
+        <SecondaryButton onClick={() => setIsOpen(!isOpen)}>
+          {period.label} <Chevron isOpen={isOpen} size={16} />{' '}
+        </SecondaryButton>
+
         <Dropdown
           anchorRef={anchorRef}
           onSelect={rangeChange}
