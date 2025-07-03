@@ -47,7 +47,7 @@ export default function Task({ task }: { task: TaskProps }) {
           <TaskFooterIcons icon={IconImage} count={task.resources.length || 0} />
         </div>
 
-        <TaskActions />
+        <TaskActions taskId={task.id} />
       </div>
     </Card>
   );

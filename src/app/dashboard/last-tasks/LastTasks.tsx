@@ -5,6 +5,7 @@ import { useAppSelector } from '@/store';
 
 export default function LastTasks() {
   const tasks = useAppSelector(selectVisibleTasks);
+
   return (
     <div>
       <LastTasksHeader title={'Last Tasks'} count={tasks.length} />
