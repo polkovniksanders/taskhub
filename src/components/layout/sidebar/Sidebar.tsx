@@ -11,6 +11,10 @@ const SidebarProjects = dynamic(() => import('@/components/layout/sidebar/Sideba
   ssr: true,
 });
 
+const DynamicThemeToggle = dynamic(() => import('../theme-toggle/ThemeToggle'), {
+  ssr: false,
+});
+
 export const Sidebar = () => {
   const { isSidebarOpen } = useSidebar();
 
@@ -20,7 +24,11 @@ export const Sidebar = () => {
       aria-label='Sidebar'
       className={`flex flex-col ${isSidebarOpen ? 'items-start ' : 'items-center'} justify-start  p-5 bg-white dark:bg-neutral-900 gap-9`}
     >
-      <MenuSwitcher />
+      <div className={'flex flex-row gap-2'}>
+        <MenuSwitcher />
+        <DynamicThemeToggle />
+      </div>
+
       <SidebarItem>
         <SidebarHeading title={isSidebarOpen ? 'Account' : 'Acc'} />
         <SidebarProfile />

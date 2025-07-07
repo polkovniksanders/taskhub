@@ -1,10 +1,11 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import Messages from '@/app/messages/Messages';
 
 export const metadata: Metadata = {
-  title: 'Reports',
+  title: 'Messages',
 };
 
 export default function Page() {
-  return <div>Reports</div>;
+  return <Messages />;
 }

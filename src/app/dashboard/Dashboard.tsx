@@ -5,9 +5,9 @@ import SearchField from '@/components/ui/search-field/SearchField';
 import React from 'react';
 import ProjectStats from '@/app/dashboard/project-stats/ProjectStats';
 import ProjectChart from '@/app/dashboard/project-chart/ProjectChart';
-import LastTasks from '@/app/dashboard/last-tasks/LastTasks';
 import Chat from '@/app/dashboard/chat/Chat';
 import TodayTasks from '@/app/dashboard/today-tasks/TodayTasks';
+import LastTasks from '@/app/dashboard/last-tasks/LastTasks';
 
 export default function Dashboard() {
   return (
@@ -24,7 +24,6 @@ export default function Dashboard() {
         </div>
 
         <LastTasks />
-
         <TodayTasks />
       </div>
 

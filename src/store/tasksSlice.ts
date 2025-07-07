@@ -1,6 +1,8 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { TaskProps } from '@/shared/interfaces/tasks.interface';
 import { generateTasks } from '@/app/dashboard/last-tasks/data/last-tasks.data';
+import { createSelector } from 'reselect';
+import type { RootState } from '@/store/index';
 
 interface TasksState {
   list: TaskProps[];
@@ -32,24 +34,21 @@ export const tasksSlice = createSlice({
 
 export const { setStatusFilter, setTasks, setSortDirection } = tasksSlice.actions;
 
-export const sortTasks = (tasks: TaskProps[], sortDirection: 'asc' | 'desc'): TaskProps[] => {
-  if (sortDirection === 'asc') {
-    return [...tasks].sort((a, b) => (a.dueDate ?? 0) - (b.dueDate ?? 0));
-  }
-  return [...tasks].sort((a, b) => (b.dueDate ?? 0) - (a.dueDate ?? 0));
-};
+export const selectTasksState = (state: RootState) => state.tasks;
 
-export const selectFilteredTasks = (state: { tasks: TasksState }) => {
-  if (state.tasks.filterStatus === 'all') return state.tasks.list;
-  return state.tasks.list.filter(t => t.status === state.tasks.filterStatus);
-};
-
-export const selectVisibleTasks = (state: { tasks: TasksState }) => {
+export const selectVisibleTasks = createSelector([selectTasksState], tasksState => {
   const filtered =
-    state.tasks.filterStatus === 'all'
-      ? state.tasks.list
-      : state.tasks.list.filter(t => t.status === state.tasks.filterStatus);
-  return sortTasks(filtered, state.tasks.sortDirection);
-};
+    tasksState.filterStatus === 'all'
+      ? tasksState.list
+      : tasksState.list.filter(t => t.status === tasksState.filterStatus);
+  return tasksState.sortDirection === 'asc'
+    ? [...filtered].sort((a, b) => (a.dueDate ?? 0) - (b.dueDate ?? 0))
+    : [...filtered].sort((a, b) => (b.dueDate ?? 0) - (a.dueDate ?? 0));
+});
+
+export const selectTaskById = createSelector(
+  [(state: RootState) => state.tasks.list, (_: RootState, id: string) => id],
+  (list, id) => list.find(task => task.id === id),
+);
 
 export default tasksSlice.reducer;

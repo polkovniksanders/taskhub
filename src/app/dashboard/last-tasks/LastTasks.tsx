@@ -1,10 +1,11 @@
-import Task from '@/components/ui/task/Task';
+import Task from '@/app/dashboard/last-tasks/Task';
 import LastTasksHeader from '@/app/dashboard/last-tasks/LastTasksHeader';
 import { selectVisibleTasks } from '@/store/tasksSlice';
 import { useAppSelector } from '@/store';
 
 export default function LastTasks() {
   const tasks = useAppSelector(selectVisibleTasks);
+
   return (
     <div>
       <LastTasksHeader title={'Last Tasks'} count={tasks.length} />

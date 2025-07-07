@@ -34,6 +34,7 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body className={`${font.variable} antialiased`}>
         <Providers>{children}</Providers>
+        <div id='modal-root' />
       </body>
     </html>
   );
