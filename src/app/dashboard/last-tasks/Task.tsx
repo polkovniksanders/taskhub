@@ -6,9 +6,9 @@ import { MessageSquareMore, Link, Image as IconImage } from 'lucide-react';
 import type { TaskProps } from '@/shared/interfaces/tasks.interface';
 import TaskFooterIcons from '@/app/dashboard/last-tasks/TaskFooterIcons';
 import TaskActions from '@/app/dashboard/last-tasks/TaskActions';
-import LastTaskProgress from '@/app/dashboard/last-tasks/LastTaskProgress';
 import Card from '@/components/ui/card/Card';
 import LastTaskIcon from '@/app/dashboard/last-tasks/LastTaskIcon';
+import ProgressBar from '@/components/ui/progressBar/ProgressBar';
 
 export default function Task({ task }: { task: TaskProps }) {
   const completedCount = task.subtasks.filter(item => item.isDone).length;
@@ -39,7 +39,7 @@ export default function Task({ task }: { task: TaskProps }) {
           ))}
         </div>
       </div>
-      <LastTaskProgress progress={progress} />
+      <ProgressBar progress={progress} />
       <div className='flex items-center justify-between mt-2'>
         <div className='flex items-center gap-1 sm:gap-2 text-gray-400 text-sm sm:text-base'>
           <TaskFooterIcons icon={MessageSquareMore} count={task.comments.length || 0} />

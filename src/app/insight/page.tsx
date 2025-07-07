@@ -1,10 +1,11 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import Insight from '@/app/insight/Insight';
 
 export const metadata: Metadata = {
-  title: 'Team',
+  title: 'Insight',
 };
 
 export default function Page() {
-  return <div>Team</div>;
+  return <Insight />;
 }

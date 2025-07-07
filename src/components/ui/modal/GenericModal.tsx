@@ -1,8 +1,8 @@
 import React, { type PropsWithChildren, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-
 import { ChevronsUp, X } from 'lucide-react';
 import useModal from '@/app/dashboard/last-tasks/hooks/useModal';
+import Card from '@/components/ui/card/Card';
 
 interface ModalProps extends PropsWithChildren {
   readonly title: string;
@@ -30,20 +30,78 @@ export default function GenericModal({ children, title, buttonText, headerAction
   if (!modalRoot) return null;
 
   return createPortal(
-    <div className='fixed inset-0 flex w-full items-end justify-end bg-black/10 z-[999]'>
-      <div className='bg-white top-0 right-0 h-screen w-4/5 rounded-[30px]  mx-4 p-4 pt-0 pb-6 sm:max-w-lg'>
-        <div className='flex flex-row justify-between bg-white items-center px-4 pt-2 pb-6 border-b'>
-          <div className='flex gap-4 items-center'>
-            {headerAction && <ChevronsUp />}
-            {title && title}
+    <div className='fixed inset-0 z-[999] flex items-center justify-center bg-black/50 transition-opacity backdrop-blur-sm animate-fade-in'>
+      <Card>
+        <div className='relative rounded-3xl w-[90vw] max-w-xl sm:max-w-lg  flex flex-col animate-modal-pop'>
+          <button
+            onClick={close}
+            className='cursor-pointer absolute top-0 right-0 p-1 rounded-full transition'
+            aria-label='close'
+          >
+            <X size={22} />
+          </button>
+          <div className='flex items-center gap-3 mb-6'>
+            {headerAction && (
+              <button
+                onClick={headerAction}
+                className='text-gray-400 hover:text-primary transition'
+                aria-label='Action'
+              >
+                <ChevronsUp />
+              </button>
+            )}
+            <h2 className='text-lg sm:text-xl font-bold '>{title}</h2>
           </div>
-          <div onClick={close}>
-            <X />
-          </div>
+          {/* Контент */}
+          <div className='flex-1 overflow-y-auto custom-scroll pb-2'>{children}</div>
+          {/* Кнопка действия */}
+          {buttonText && (
+            <div className='mt-8 flex justify-end'>
+              <button
+                className='bg-primary hover:bg-primary/90 text-white font-medium px-6 py-2 rounded-xl shadow transition'
+                onClick={close}
+              >
+                {buttonText}
+              </button>
+            </div>
+          )}
         </div>
-        <div className='mt-4 px-4 pb-4'>{children}</div>
-        {buttonText && <div className='px-4'>{buttonText}</div>}
-      </div>
+        {/* Анимации */}
+        <style jsx global>{`
+          @keyframes fade-in {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+          .animate-fade-in {
+            animation: fade-in 0.22s ease;
+          }
+          @keyframes modal-pop {
+            from {
+              transform: translateY(32px) scale(0.97);
+              opacity: 0.7;
+            }
+            to {
+              transform: translateY(0) scale(1);
+              opacity: 1;
+            }
+          }
+          .animate-modal-pop {
+            animation: modal-pop 0.26s cubic-bezier(0.4, 1.6, 0.6, 1);
+          }
+          .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+            background: transparent;
+          }
+          .custom-scroll::-webkit-scrollbar-thumb {
+            background: #e3e3e3;
+            border-radius: 3px;
+          }
+        `}</style>
+      </Card>
     </div>,
     modalRoot,
   );

@@ -1,10 +1,11 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import Report from '@/app/report/Report';
 
 export const metadata: Metadata = {
-  title: 'Schedule',
+  title: 'Report',
 };
 
 export default function Page() {
-  return <div>Schedule</div>;
+  return <Report />;
 }
