@@ -3,11 +3,13 @@ import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux
 
 import sidebarReducer from './sidebarSlice';
 import tasksReducer from './tasksSlice';
+import userReducer from './userSlice';
 
 export const store = configureStore({
   reducer: {
     sidebar: sidebarReducer,
     tasks: tasksReducer,
+    user: userReducer,
   },
 });
 

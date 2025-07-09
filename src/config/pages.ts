@@ -1,6 +1,7 @@
 export class Pages {
   static BASE = '/dashboard';
 
+  static HOME = '/';
   static DASHBOARD = Pages.BASE;
   static MESSAGES = `/messages`;
   static INSIGHT = `/insight`;
