@@ -1,43 +1,33 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
-import Dropdown from '@/components/ui/dropdown/Dropdown';
-import { generateUsers } from '@/app/users.data';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import Chevron from '@/components/ui/chevron/Chevron';
 import { useSidebar } from '@/hooks/useSidebar';
-
-type UserDropdownItem = {
-  label: string;
-  value: string;
-  id: string;
-  email: string;
-  image: string;
-};
+import { useAppDispatch, useAppSelector } from '@/store';
+import { selectUserState, setCurrentUser } from '@/store/userSlice';
+import { LogOut } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Pages } from '@/config/pages';
 
 export default function SidebarProfile() {
   const [isOpen, setIsOpen] = useState(false);
   const anchorRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const { users, currentUser } = useAppSelector(selectUserState);
+  const dispatch = useAppDispatch();
+
   const { isSidebarOpen } = useSidebar();
 
-  const USERS = useMemo(() => generateUsers(9), []);
-
-  const [currentUser, selectCurrentUser] = useState<UserDropdownItem | null>(null);
-
   useEffect(() => {
-    if (USERS.length > 0) {
-      const randomIndex = Math.floor(Math.random() * USERS.length);
-      const randomUser = USERS[randomIndex];
-      selectCurrentUser({
-        label: randomUser.name,
-        value: randomUser.email,
-        ...randomUser,
-      });
+    if (!currentUser && users.length > 0) {
+      const randomIndex = Math.floor(Math.random() * users.length);
+      dispatch(setCurrentUser(users[randomIndex]));
     }
-  }, [USERS]);
+  }, [currentUser, users, dispatch]);
 
-  const handleSelectUser = (item: UserDropdownItem) => {
-    selectCurrentUser({ ...item });
+  const handleLogout = () => {
+    router.push(Pages.HOME);
+    dispatch(setCurrentUser(null));
   };
 
   if (!currentUser) return null;
@@ -48,36 +38,24 @@ export default function SidebarProfile() {
       onClick={() => setIsOpen(!isOpen)}
       className='relative cursor-pointer flex items-center gap-2.5'
     >
-      <Dropdown<UserDropdownItem>
-        onSelect={handleSelectUser}
-        setIsOpen={setIsOpen}
-        isOpen={isOpen}
-        list={USERS.map(user => ({
-          label: user.name,
-          value: user.email,
-          ...user,
-        }))}
-        anchorRef={anchorRef}
-      />
-
       <Image
         className='rounded-2xl'
         width={32}
         height={32}
         src={currentUser.image || ''}
-        alt={currentUser.label}
+        alt={currentUser.name}
       />
 
       {isSidebarOpen && (
         <div className='leading-snug'>
-          <div className='font-medium'>{currentUser?.label}</div>
-          <div className='opacity-60 text-xs font-medium'>{currentUser?.value}</div>
+          <div className='font-medium'>{currentUser?.name}</div>
+          <div className='opacity-60 text-xs font-medium'>{currentUser?.email}</div>
         </div>
       )}
 
       {isSidebarOpen && (
-        <div className='ml-1'>
-          <Chevron isOpen={isOpen} size={16} />
+        <div onClick={handleLogout} className='ml-1 cursor-pointer'>
+          <LogOut />
         </div>
       )}
     </div>
