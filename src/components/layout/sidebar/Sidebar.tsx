@@ -6,7 +6,6 @@ import SidebarItem from '@/widgets/sidebar/SidebarItem';
 import dynamic from 'next/dynamic';
 import MenuSwitcher from '@/components/layout/menu-switcher/MenuSwitcher';
 import { useSidebar } from '@/hooks/useSidebar';
-import Card from '@/components/ui/card/Card';
 
 const SidebarProjects = dynamic(() => import('@/components/layout/sidebar/SidebarProjects'), {
   ssr: true,
