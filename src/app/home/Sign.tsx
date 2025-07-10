@@ -10,6 +10,7 @@ export default function Sign() {
 
   const createInitialUser = () => {
     const initialUser = {
+      id: '0',
       name: 'guest',
       email: 'guest@berghub.ru',
       password: '12345678',

@@ -22,14 +22,18 @@ export default function SignInForm() {
   const router = useRouter();
 
   const onSubmit = async (data: UserAuth) => {
-    dispatch(addUser(data));
+    const payload = {
+      id: '0',
+      ...data,
+    };
+    dispatch(addUser(payload));
 
     const hashedPassword = btoa(data.password);
 
     router.push(Pages.DASHBOARD);
 
     sessionStorage.setItem('authToken', hashedPassword);
-    sessionStorage.setItem('user', JSON.stringify(data));
+    sessionStorage.setItem('user', JSON.stringify(payload));
   };
 
   useEffect(() => {

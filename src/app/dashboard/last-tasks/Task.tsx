@@ -10,6 +10,7 @@ import Card from '@/components/ui/card/Card';
 import LastTaskIcon from '@/app/dashboard/last-tasks/LastTaskIcon';
 import ProgressBar from '@/components/ui/progressBar/ProgressBar';
 import { ICON_SIZES } from '@/constants/constants';
+import { getDueDateColor } from '@/utils/getDueColor';
 
 export default function Task({ task }: { task: TaskProps }) {
   const completedCount = task.subtasks.filter(item => item.isDone).length;
@@ -18,29 +19,33 @@ export default function Task({ task }: { task: TaskProps }) {
 
   return (
     <Card>
-      <div className='flex items-start justify-between gap-2 sm:gap-0'>
-        <div className='flex gap-2 sm:gap-3 items-center'>
-          <div className={'flex flex-col gap-2'}>
+      <div className='flex items-start justify-between gap-2 sm:gap-0 w-full'>
+        <div className='flex gap-2 sm:gap-3 items-center w-full'>
+          <div className={'flex flex-col gap-2 w-full'}>
             <div className='font-semibold text-base sm:text-lg leading-5'>{task.title}</div>
 
-            <div className='text-gray-400 flex flex-row items-center gap-1 text-xs sm:text-sm'>
-              <LastTaskIcon status={task.status} />
-              <CalendarClock size={ICON_SIZES.medium} /> {+task.dueDate} days
+            <div className={'flex flex-row justify-between'}>
+              <div className='text-gray-400 flex flex-row items-center gap-1 text-xs sm:text-sm'>
+                <LastTaskIcon status={task.status} />
+                <CalendarClock className={getDueDateColor(task.dueDate)} size={ICON_SIZES.medium} />
+                {+task.dueDate} days
+              </div>
+
+              <div className='flex -space-x-2 sm:-space-x-3'>
+                {task.users.slice(0, 3).map(user => (
+                  <div key={user.id} className='border-2 border-white rounded-full'>
+                    <Image
+                      src={user.image || ''}
+                      alt={user.name}
+                      width={28}
+                      height={28}
+                      className='rounded-full object-cover sm:w-8 sm:h-8'
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-        <div className='flex -space-x-2 sm:-space-x-3'>
-          {task.users.slice(0, 3).map(user => (
-            <div key={user.id} className='border-2 border-white rounded-full'>
-              <Image
-                src={user.image || ''}
-                alt={user.name}
-                width={28}
-                height={28}
-                className='rounded-full object-cover sm:w-8 sm:h-8'
-              />
-            </div>
-          ))}
         </div>
       </div>
       <ProgressBar progress={progress} />

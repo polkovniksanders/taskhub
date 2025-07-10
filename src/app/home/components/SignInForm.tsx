@@ -24,8 +24,13 @@ export default function SignInForm() {
   const toast = useToast();
 
   const onSubmit = async (data: UserAuth) => {
-    dispatch(addUser(data));
-    sessionStorage.setItem('user', JSON.stringify(data));
+    const payload = {
+      id: '0',
+      ...data,
+    };
+    dispatch(addUser(payload));
+
+    sessionStorage.setItem('user', JSON.stringify(payload));
 
     const password = sessionStorage.getItem('authToken');
     const hashedPassword = btoa(data.password);

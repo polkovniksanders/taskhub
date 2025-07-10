@@ -6,7 +6,7 @@ export interface User {
 }
 
 export interface UserAuth {
-  id: string;
+  id?: string;
   name: string;
   email: string;
   image?: string;
