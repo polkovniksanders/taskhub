@@ -10,7 +10,7 @@ type UserState = {
 
 const initialState: UserState = {
   currentUser: null,
-  users: generateUsers(10, 0),
+  users: generateUsers(20, 0),
 };
 
 const userSlice = createSlice({

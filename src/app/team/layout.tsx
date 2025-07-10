@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       className={`grid ${isSidebarOpen ? 'grid-cols-[230px_1fr]' : 'grid-cols-[80px_1fr]'} h-screen`}
     >
       <Sidebar />
-      <main className='p-5 w-fit'>{children}</main>
+      <main className='p-5 w-full'>{children}</main>
     </div>
   );
 }
