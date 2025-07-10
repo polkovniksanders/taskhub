@@ -5,7 +5,7 @@ export interface User {
   image: string;
 }
 
-export interface UserCreate {
+export interface UserAuth {
   id: string;
   name: string;
   email: string;

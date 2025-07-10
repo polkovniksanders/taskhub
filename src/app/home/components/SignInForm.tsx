@@ -4,12 +4,13 @@ import { useForm } from 'react-hook-form';
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton';
 import Input from '@/components/ui/form/Input';
 import { useEffect } from 'react';
-import type { User } from '@/shared/interfaces/user.interface';
+import type { UserAuth } from '@/shared/interfaces/user.interface';
 import { useAppDispatch } from '@/store';
 import { addUser } from '@/store/userSlice';
 import Field from '@/components/ui/form/Field';
 import { useRouter } from 'next/navigation';
 import { Pages } from '@/config/pages';
+import { useToast } from '@/hooks/useToast';
 
 export default function SignInForm() {
   const {
@@ -17,14 +18,24 @@ export default function SignInForm() {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting, isSubmitSuccessful },
-  } = useForm<User>();
+  } = useForm<UserAuth>();
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const toast = useToast();
 
-  const onSubmit = async (data: User) => {
+  const onSubmit = async (data: UserAuth) => {
     dispatch(addUser(data));
-    router.push(Pages.DASHBOARD);
     sessionStorage.setItem('user', JSON.stringify(data));
+
+    const password = sessionStorage.getItem('authToken');
+    const hashedPassword = btoa(data.password);
+
+    if (password === hashedPassword) {
+      console.log('correct password');
+      router.push(Pages.DASHBOARD);
+    } else {
+      toast('Incorrect password');
+    }
   };
 
   useEffect(() => {
@@ -34,7 +45,7 @@ export default function SignInForm() {
   return (
     <form className={'flex flex-col gap-8'} onSubmit={handleSubmit(onSubmit)}>
       <Field error={errors.name?.message}>
-        <Input<User>
+        <Input<UserAuth>
           type={'text'}
           name='name'
           register={register}
@@ -43,11 +54,19 @@ export default function SignInForm() {
       </Field>
 
       <Field error={errors.email?.message}>
-        <Input<User>
+        <Input<UserAuth>
           type={'email'}
           name='email'
           register={register}
           placeholder='Please enter your email'
+        />
+      </Field>
+      <Field error={errors.password?.message}>
+        <Input<UserAuth>
+          type={'password'}
+          name='password'
+          register={register}
+          placeholder='Please enter your password'
         />
       </Field>
 
