@@ -1,10 +1,10 @@
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ICON_SIZES } from '@/constants/constants';
 
 interface ChevronProps {
   isOpen: boolean;
-  size: number;
 }
 
-export default function Chevron({ isOpen, size = 16 }: ChevronProps) {
-  return isOpen ? <ChevronDown size={size} /> : <ChevronUp size={size} />;
+export default function Chevron({ isOpen }: ChevronProps) {
+  return isOpen ? <ChevronDown size={ICON_SIZES.small} /> : <ChevronUp size={ICON_SIZES.small} />;
 }

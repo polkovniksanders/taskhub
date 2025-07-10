@@ -6,7 +6,7 @@ interface FieldProps extends PropsWithChildren {
 }
 export default function Field({ children, error }: FieldProps) {
   return (
-    <div>
+    <div className={'w-auto '}>
       {children}
       {error && <span className='text-red-500 text-xs'>{error}</span>}
     </div>

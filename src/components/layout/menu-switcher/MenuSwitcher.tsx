@@ -2,6 +2,7 @@
 import { Menu } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { useSidebar } from '@/hooks/useSidebar';
+import { ICON_SIZES } from '@/constants/constants';
 
 export default function MenuSwitcher() {
   const { toggleSidebar } = useSidebar();
@@ -13,7 +14,7 @@ export default function MenuSwitcher() {
 
   return (
     <div className={'w-fit '} onClick={switchMenu}>
-      <Menu className={'cursor-pointer'} />
+      <Menu size={ICON_SIZES.large} className={'cursor-pointer'} />
     </div>
   );
 }

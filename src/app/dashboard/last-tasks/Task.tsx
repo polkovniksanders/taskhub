@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { MessageSquareMore, Link, Image as IconImage } from 'lucide-react';
+import { MessageSquareMore, Link, Image as IconImage, CalendarClock } from 'lucide-react';
 
 import type { TaskProps } from '@/shared/interfaces/tasks.interface';
 import TaskFooterIcons from '@/app/dashboard/last-tasks/TaskFooterIcons';
@@ -9,6 +9,7 @@ import TaskActions from '@/app/dashboard/last-tasks/TaskActions';
 import Card from '@/components/ui/card/Card';
 import LastTaskIcon from '@/app/dashboard/last-tasks/LastTaskIcon';
 import ProgressBar from '@/components/ui/progressBar/ProgressBar';
+import { ICON_SIZES } from '@/constants/constants';
 
 export default function Task({ task }: { task: TaskProps }) {
   const completedCount = task.subtasks.filter(item => item.isDone).length;
@@ -19,10 +20,13 @@ export default function Task({ task }: { task: TaskProps }) {
     <Card>
       <div className='flex items-start justify-between gap-2 sm:gap-0'>
         <div className='flex gap-2 sm:gap-3 items-center'>
-          <LastTaskIcon status={task.status} />
-          <div>
+          <div className={'flex flex-col gap-2'}>
             <div className='font-semibold text-base sm:text-lg leading-5'>{task.title}</div>
-            <div className='text-gray-400 text-xs sm:text-sm mt-1'>Due : {+task.dueDate} days</div>
+
+            <div className='text-gray-400 flex flex-row items-center gap-1 text-xs sm:text-sm'>
+              <LastTaskIcon status={task.status} />
+              <CalendarClock size={ICON_SIZES.medium} /> {+task.dueDate} days
+            </div>
           </div>
         </div>
         <div className='flex -space-x-2 sm:-space-x-3'>

@@ -1,5 +1,6 @@
 import { useTheme } from 'next-themes';
 import { Eye, EyeOff } from 'lucide-react';
+import { ICON_SIZES } from '@/constants/constants';
 
 export default function ThemeToggle() {
   const { setTheme, theme } = useTheme();
@@ -16,7 +17,7 @@ export default function ThemeToggle() {
       className='cursor-pointer'
       onClick={toggleTheme}
     >
-      {isDark ? <Eye /> : <EyeOff />}
+      {isDark ? <Eye size={ICON_SIZES.large} /> : <EyeOff size={ICON_SIZES.large} />}
     </button>
   );
 }

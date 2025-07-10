@@ -52,9 +52,7 @@ export default function GenericModal({ children, title, buttonText, headerAction
             )}
             <h2 className='text-lg sm:text-xl font-bold '>{title}</h2>
           </div>
-          {/* Контент */}
           <div className='flex-1 overflow-y-auto custom-scroll pb-2'>{children}</div>
-          {/* Кнопка действия */}
           {buttonText && (
             <div className='mt-8 flex justify-end'>
               <button
@@ -66,41 +64,6 @@ export default function GenericModal({ children, title, buttonText, headerAction
             </div>
           )}
         </div>
-        {/* Анимации */}
-        <style jsx global>{`
-          @keyframes fade-in {
-            from {
-              opacity: 0;
-            }
-            to {
-              opacity: 1;
-            }
-          }
-          .animate-fade-in {
-            animation: fade-in 0.22s ease;
-          }
-          @keyframes modal-pop {
-            from {
-              transform: translateY(32px) scale(0.97);
-              opacity: 0.7;
-            }
-            to {
-              transform: translateY(0) scale(1);
-              opacity: 1;
-            }
-          }
-          .animate-modal-pop {
-            animation: modal-pop 0.26s cubic-bezier(0.4, 1.6, 0.6, 1);
-          }
-          .custom-scroll::-webkit-scrollbar {
-            width: 6px;
-            background: transparent;
-          }
-          .custom-scroll::-webkit-scrollbar-thumb {
-            background: #e3e3e3;
-            border-radius: 3px;
-          }
-        `}</style>
       </Card>
     </div>,
     modalRoot,

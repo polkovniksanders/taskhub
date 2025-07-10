@@ -1,12 +1,12 @@
 import Card from '@/components/ui/card/Card';
 import SubTitle from '@/components/ui/typography/SubTitle';
+import Chart from '@/app/dashboard/today-tasks/Chart';
 
 export default function TodayTasks() {
   return (
-    <div>
-      <Card>
-        <SubTitle title={'Today Tasks'} />
-      </Card>
-    </div>
+    <Card>
+      <SubTitle title={'Today Tasks'} />
+      <Chart />
+    </Card>
   );
 }

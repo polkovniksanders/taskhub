@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form';
 import PrimaryButton from '@/components/ui/buttons/PrimaryButton';
 import type { TaskProps } from '@/shared/interfaces/tasks.interface';
-import 'react-simple-toasts/dist/style.css';
-import 'react-simple-toasts/dist/theme/dark.css';
 import { SAVE } from '@/constants/constants';
 import { useToast } from '@/hooks/useToast';
+import Input from '@/components/ui/form/Input';
+import Field from '@/components/ui/form/Field';
+import useModal from '@/app/dashboard/last-tasks/hooks/useModal';
 
 type FormValues = {
   title: string;
@@ -14,8 +15,9 @@ type FormValues = {
 
 export type TaskEditFormProps = Pick<TaskProps, 'title' | 'status' | 'dueDate'>;
 
-export default function TaskEditForm({ task }: { task: TaskEditFormProps }) {
+export default function TaskForm({ task }: { task: TaskEditFormProps }) {
   const toast = useToast();
+  const { close } = useModal();
 
   const {
     register,
@@ -31,31 +33,28 @@ export default function TaskEditForm({ task }: { task: TaskEditFormProps }) {
 
   const onSubmit = () => {
     toast('Successfully saved!');
+    close();
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
-      <div>
-        <label className='block mb-1 font-medium'>Title</label>
-        <input
-          {...register('title', { required: 'Entre title' })}
-          className='w-full rounded-lg border px-3 py-2'
+    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-8'>
+      <Field error={errors.dueDate?.message}>
+        <Input<FormValues>
+          type={'text'}
+          name='title'
+          register={register}
+          placeholder='Please enter title'
         />
-        {errors.title && <p className='text-red-500 text-sm mt-1'>{errors.title.message}</p>}
-      </div>
+      </Field>
 
-      <div>
-        <label className='block mb-1 font-medium'>Due Date</label>
-        <input
-          min={1}
-          max={90}
-          maxLength={2}
+      <Field error={errors.dueDate?.message}>
+        <Input<FormValues>
           type={'number'}
-          {...register('dueDate', { required: 'Enter due number' })}
-          className='w-full rounded-lg border px-3 py-2'
+          name='dueDate'
+          register={register}
+          placeholder='Please enter due date'
         />
-        {errors.dueDate && <p className='text-red-500 text-sm mt-1'>{errors.dueDate.message}</p>}
-      </div>
+      </Field>
 
       <PrimaryButton>{SAVE}</PrimaryButton>
     </form>

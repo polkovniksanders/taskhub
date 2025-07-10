@@ -1,6 +1,7 @@
 import SubTitle from '@/components/ui/typography/SubTitle';
-import LastTasksFilter from '@/app/dashboard/last-tasks/LastTasksFilter';
-import LastTasksSort from '@/app/dashboard/last-tasks/LastTasksSort';
+import Status from '@/app/dashboard/last-tasks/filters/Status';
+import Sort from '@/app/dashboard/last-tasks/filters/Sort';
+import Limit from '@/app/dashboard/last-tasks/filters/Limit';
 
 interface LastTasksTitleProps {
   title: string;
@@ -15,8 +16,9 @@ export default function LastTasksHeader({ title, count = 0 }: LastTasksTitleProp
       </div>
 
       <div className={'flex items-center gap-4'}>
-        <LastTasksFilter />
-        <LastTasksSort />
+        <Status />
+        <Limit />
+        <Sort />
       </div>
     </div>
   );

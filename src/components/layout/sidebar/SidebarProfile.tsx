@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import Image from 'next/image';
 import { useSidebar } from '@/hooks/useSidebar';
 import { useAppDispatch, useAppSelector } from '@/store';
@@ -8,10 +8,10 @@ import { selectUserState, setCurrentUser } from '@/store/userSlice';
 import { LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Pages } from '@/config/pages';
+import { ICON_SIZES } from '@/constants/constants';
+import clsx from 'clsx';
 
 export default function SidebarProfile() {
-  const [isOpen, setIsOpen] = useState(false);
-  const anchorRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const { users, currentUser } = useAppSelector(selectUserState);
   const dispatch = useAppDispatch();
@@ -35,9 +35,10 @@ export default function SidebarProfile() {
 
   return (
     <div
-      ref={anchorRef}
-      onClick={() => setIsOpen(!isOpen)}
-      className='relative cursor-pointer flex items-center gap-2.5'
+      className={clsx(
+        'relative cursor-pointer flex items-center gap-2.5',
+        isSidebarOpen ? 'flex-row' : 'flex-col',
+      )}
     >
       <Image
         className='rounded-2xl'
@@ -54,11 +55,9 @@ export default function SidebarProfile() {
         </div>
       )}
 
-      {isSidebarOpen && (
-        <div onClick={handleLogout} className='ml-1 cursor-pointer'>
-          <LogOut />
-        </div>
-      )}
+      <div onClick={handleLogout} className='ml-1 cursor-pointer'>
+        <LogOut size={ICON_SIZES.large} />
+      </div>
     </div>
   );
 }

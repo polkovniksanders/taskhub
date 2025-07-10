@@ -1,4 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
+import { ICON_SIZES } from '@/constants/constants';
 
 interface TaskFooterIconsProps {
   icon: LucideIcon;
@@ -8,7 +9,7 @@ interface TaskFooterIconsProps {
 export default function TaskFooterIcons({ icon: Icon, count }: TaskFooterIconsProps) {
   return (
     <div className='flex items-center gap-1'>
-      <Icon size={14} />
+      <Icon size={ICON_SIZES.small} />
       <span className='text-sm text-gray-700 dark:text-white'>{count}</span>
     </div>
   );

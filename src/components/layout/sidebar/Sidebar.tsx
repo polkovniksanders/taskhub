@@ -30,15 +30,15 @@ export const Sidebar = () => {
       </div>
 
       <SidebarItem>
-        <SidebarHeading title={isSidebarOpen ? 'Account' : 'Acc'} />
+        {isSidebarOpen && <SidebarHeading title={'Account'} />}
         <SidebarProfile />
       </SidebarItem>
       <SidebarItem>
-        <SidebarHeading title={'Main Menu'} />
+        {isSidebarOpen && <SidebarHeading title={'Menu'} />}
         <SidebarMenu />
       </SidebarItem>
       <SidebarItem>
-        <SidebarHeading title={'Projects'} />
+        {isSidebarOpen && <SidebarHeading title={'Projects'} />}
         <SidebarProjects />
       </SidebarItem>
     </aside>

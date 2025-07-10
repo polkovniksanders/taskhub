@@ -5,6 +5,7 @@ import { useSidebar } from '@/hooks/useSidebar';
 import type { MenuProps } from '@/shared/interfaces/components/menu.interface';
 import cn from 'clsx';
 import type { ProjectsProps } from '@/shared/interfaces/components/projects.interface';
+import { ICON_SIZES } from '@/constants/constants';
 
 interface SidebarMenuItem extends MenuProps, ProjectsProps {}
 
@@ -15,7 +16,7 @@ export default function SidebarMenuItem({ item }: { item: SidebarMenuItem }) {
     <li>
       <Link
         href={item.href}
-        className='text-neutral-500 dark:text-white flex items-center flex-start hover:text-neutral-900 hover:dark:text-primary transition-colors pl-2'
+        className='text-neutral-500 dark:text-white flex items-center flex-start hover:text-neutral-900 hover:dark:text-primary transition-colors'
       >
         {item.color && <div className={cn(item.color, 'w-3 h-3')} />}
 
@@ -23,7 +24,7 @@ export default function SidebarMenuItem({ item }: { item: SidebarMenuItem }) {
           <span className='flex items-center gap-2'>
             <item.icon
               color={isSidebarItemActive ? 'var(--color-primary)' : 'var(--color-neutral-500)'}
-              size={20}
+              size={ICON_SIZES.medium}
             />
           </span>
         )}
@@ -35,7 +36,12 @@ export default function SidebarMenuItem({ item }: { item: SidebarMenuItem }) {
         )}
 
         {item.label === 'Messages' && (
-          <span className=' text-primary bg-[#DCDEF6] rounded-lg ml-4 px-2 text-xs font-medium'>
+          <span
+            className={cn(
+              { absolute: !isSidebarOpen },
+              'text-primary bg-[#DCDEF6] rounded-lg ml-5 px-2 text-xs font-medium',
+            )}
+          >
             4
           </span>
         )}

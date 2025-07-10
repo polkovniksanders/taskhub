@@ -14,17 +14,20 @@ export const generateTasks = (count: number) => {
   return Array.from({ length: count }, (_, i) => {
     const status = statuses[i % statuses.length];
 
-    const subtaskCount = (i % 10) + 1;
+    const subtaskCount = Math.floor(Math.random() * 12) + 1;
+
     const subtasks = Array.from({ length: subtaskCount }, (_, j) => ({
       id: `${j + 1}`,
       title: `subtask ${j + 1}`,
-      isDone: (j + i) % 2 === 0,
+      isDone: Math.random() > 0.5,
     }));
+
+    const dueDate = Math.floor(Math.random() * 30) + 1;
 
     return {
       id: `${i + 1}`,
-      title: `Task ${i + 1}`,
-      dueDate: (i % 30) + 1,
+      title: `Current task #${i + 1}`,
+      dueDate,
       comments: Array((i % 4) + 1).fill('Комментарий'),
       resources: Array((i % 3) + 1).fill(''),
       status,

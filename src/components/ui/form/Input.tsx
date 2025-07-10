@@ -15,11 +15,7 @@ export default function Input<T extends FieldValues>({
   ...rest
 }: InputProps<T>) {
   return (
-    <div
-      className={
-        'flex flex-col w-full max-w-sm px-4 py-2 bg-white rounded-full shadow-sm dark:bg-white/10'
-      }
-    >
+    <div className={'flex flex-col px-4 py-2 bg-white rounded-full shadow-sm dark:bg-white/10'}>
       <input
         type={type}
         {...register(name, { required: 'Field is required' })}

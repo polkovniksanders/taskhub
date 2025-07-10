@@ -1,41 +1,42 @@
 import Chevron from '@/components/ui/chevron/Chevron';
 import Dropdown from '@/components/ui/dropdown/Dropdown';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { filters } from '@/app/dashboard/last-tasks/data/last-tasks.data';
 import type { DropdownProps } from '@/shared/interfaces/commone.interface';
 import { setStatusFilter } from '@/store/tasksSlice';
 import { useAppDispatch } from '@/store';
 import SecondaryButton from '@/components/ui/buttons/SecondaryButton';
+import { useDropdown } from '@/hooks/useDropdown';
 
-export default function LastTasksFilter() {
-  const [isOpen, setIsOpen] = useState(false);
-  const anchorRef = useRef<HTMLDivElement>(null);
+export default function Status() {
+  const dispatch = useAppDispatch();
+  const { dropdownRef, toggleDropdown, isOpen } = useDropdown();
+
   const [currentFilter, setCurrentFilter] = useState({
     label: 'All',
     value: 'all',
   });
 
-  const dispatch = useAppDispatch();
-
   const filterTasks = (item: DropdownProps) => {
     setCurrentFilter(item);
     dispatch(setStatusFilter(item.value));
-    setIsOpen(false);
+    toggleDropdown();
   };
 
   return (
     <div>
-      <div className='relative' ref={anchorRef}>
-        <SecondaryButton onClick={() => setIsOpen(!isOpen)}>
-          {currentFilter.label} <Chevron isOpen={isOpen} size={16} />
+      <div className='relative' ref={dropdownRef}>
+        <SecondaryButton onClick={toggleDropdown}>
+          {currentFilter.label} <Chevron isOpen={isOpen} />
         </SecondaryButton>
 
         <Dropdown
-          anchorRef={anchorRef}
+          anchorRef={dropdownRef}
           onSelect={filterTasks}
           list={filters}
           isOpen={isOpen}
-          setIsOpen={setIsOpen}
+          setIsOpen={toggleDropdown}
+          activeValue={currentFilter.value}
         />
       </div>
     </div>

@@ -8,12 +8,14 @@ interface TasksState {
   list: TaskProps[];
   filterStatus: string;
   sortDirection: 'asc' | 'desc';
+  limit: number;
 }
 
 const initialState: TasksState = {
   list: generateTasks(20),
   filterStatus: 'all',
   sortDirection: 'desc',
+  limit: 3,
 };
 
 export const tasksSlice = createSlice({
@@ -29,11 +31,13 @@ export const tasksSlice = createSlice({
     setSortDirection(state, action: PayloadAction<'asc' | 'desc'>) {
       state.sortDirection = action.payload;
     },
+    setLimit(state, action: PayloadAction<number>) {
+      state.limit = action.payload;
+    },
   },
 });
 
-export const { setStatusFilter, setTasks, setSortDirection } = tasksSlice.actions;
-
+export const { setStatusFilter, setTasks, setSortDirection, setLimit } = tasksSlice.actions;
 export const selectTasksState = (state: RootState) => state.tasks;
 
 export const selectVisibleTasks = createSelector([selectTasksState], tasksState => {
@@ -41,9 +45,13 @@ export const selectVisibleTasks = createSelector([selectTasksState], tasksState 
     tasksState.filterStatus === 'all'
       ? tasksState.list
       : tasksState.list.filter(t => t.status === tasksState.filterStatus);
-  return tasksState.sortDirection === 'asc'
-    ? [...filtered].sort((a, b) => (a.dueDate ?? 0) - (b.dueDate ?? 0))
-    : [...filtered].sort((a, b) => (b.dueDate ?? 0) - (a.dueDate ?? 0));
+
+  const sorted =
+    tasksState.sortDirection === 'asc'
+      ? [...filtered].sort((a, b) => (a.dueDate ?? 0) - (b.dueDate ?? 0))
+      : [...filtered].sort((a, b) => (b.dueDate ?? 0) - (a.dueDate ?? 0));
+
+  return tasksState.limit === 0 ? sorted : sorted.slice(0, tasksState.limit);
 });
 
 export const selectTaskById = createSelector(

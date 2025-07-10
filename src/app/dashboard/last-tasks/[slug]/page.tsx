@@ -1,7 +1,7 @@
 'use client';
 import { useParams } from 'next/navigation';
 import GenericModal from '@/components/ui/modal/GenericModal';
-import TaskEditForm, { type TaskEditFormProps } from '@/app/dashboard/last-tasks/TaskForm';
+import TaskForm, { type TaskEditFormProps } from '@/app/dashboard/last-tasks/TaskForm';
 import { selectTaskById } from '@/store/tasksSlice';
 import { useAppSelector } from '@/store';
 
@@ -21,7 +21,7 @@ export default function ModalPage() {
 
   return (
     <GenericModal title={isCreate ? `Create task` : `Edit task ${slug}`}>
-      <TaskEditForm task={task ?? initialTask} />
+      <TaskForm task={task ?? initialTask} />
     </GenericModal>
   );
 }

@@ -1,14 +1,15 @@
 import Task from '@/app/dashboard/last-tasks/Task';
 import LastTasksHeader from '@/app/dashboard/last-tasks/LastTasksHeader';
-import { selectVisibleTasks } from '@/store/tasksSlice';
+import { selectTasksState, selectVisibleTasks } from '@/store/tasksSlice';
 import { useAppSelector } from '@/store';
 
 export default function LastTasks() {
   const tasks = useAppSelector(selectVisibleTasks);
+  const { limit } = useAppSelector(selectTasksState);
 
   return (
     <div>
-      <LastTasksHeader title={'Last Tasks'} count={tasks.length} />
+      <LastTasksHeader title={'Last Tasks'} count={limit} />
 
       <div
         className={
