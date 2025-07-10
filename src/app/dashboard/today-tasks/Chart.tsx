@@ -26,11 +26,7 @@ const CustomTooltip = (props: TooltipProps<ValueType, NameType>) => {
   ) {
     const tooltip = props.payload[0].payload as { task: TaskProps };
 
-    return (
-      <div className=' border border-gray-200 rounded p-2 shadow text-xs '>
-        <Task task={tooltip.task} />
-      </div>
-    );
+    return <Task task={tooltip.task} />;
   }
   return null;
 };
