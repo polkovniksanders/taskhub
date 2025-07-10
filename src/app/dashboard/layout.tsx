@@ -4,9 +4,11 @@ import { Sidebar } from '@/components/layout/sidebar/Sidebar';
 
 import type { ReactNode } from 'react';
 import { useSidebar } from '@/hooks/useSidebar';
+import { useAuthProtector } from '@/hooks/useAuthProtector';
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const { isSidebarOpen } = useSidebar();
+  useAuthProtector();
 
   return (
     <div

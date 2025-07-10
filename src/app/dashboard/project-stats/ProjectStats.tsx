@@ -3,7 +3,7 @@ import ProjectStatCard from '@/app/dashboard/project-stats/ProjectStatCard';
 
 export default function ProjectStats() {
   return (
-    <div className={'space-y-4'}>
+    <div className={'flex flex-col justify-between '}>
       {PROJECT_STATS_DATA.map(projectStat => (
         <ProjectStatCard key={projectStat.id} projectStat={projectStat} />
       ))}

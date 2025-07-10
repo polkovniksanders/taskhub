@@ -28,6 +28,7 @@ export default function SidebarProfile() {
   const handleLogout = () => {
     router.push(Pages.HOME);
     dispatch(setCurrentUser(null));
+    sessionStorage.removeItem('authToken');
   };
 
   if (!currentUser) return null;
