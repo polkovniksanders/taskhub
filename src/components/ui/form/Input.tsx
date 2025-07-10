@@ -5,9 +5,15 @@ interface InputProps<T extends FieldValues>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'name'> {
   name: Path<T>;
   register: UseFormRegister<T>;
+  type: string;
 }
 
-export default function Input<T extends FieldValues>({ name, register, ...rest }: InputProps<T>) {
+export default function Input<T extends FieldValues>({
+  name,
+  register,
+  type,
+  ...rest
+}: InputProps<T>) {
   return (
     <div
       className={
@@ -15,6 +21,7 @@ export default function Input<T extends FieldValues>({ name, register, ...rest }
       }
     >
       <input
+        type={type}
         {...register(name, { required: 'Field is required' })}
         {...rest}
         className={
