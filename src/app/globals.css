@@ -27,16 +27,29 @@
     }
 }
 
-@keyframes stripes-move {
-    100% {
-        background-position: 40px 0;
+@layer utilities {
+    .progress-shimmer {
+        position: relative;
+        overflow: hidden;
+    }
+    .progress-shimmer::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; bottom: 0; right: 0;
+        background: linear-gradient(
+                120deg,
+                color-mix(in srgb, var(--primary) 0%, transparent) 30%,
+                color-mix(in srgb, var(--primary) 18%, transparent) 50%,
+                color-mix(in srgb, var(--primary) 0%, transparent) 70%
+        );
+        transform: translateX(-60%);
+        animation: shimmer-move 1.8s infinite linear;
+        pointer-events: none;
+    }
+    @keyframes shimmer-move {
+        100% { transform: translateX(120%); }
     }
 }
-.bg-stripes-animate {
-    animation: stripes-move 1s linear infinite;
-    background-size: 40px 40px; /* подберите под pattern */
-}
-
 
 html {
     font-size: 16px;
