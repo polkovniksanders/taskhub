@@ -1,25 +1,33 @@
+import type { ChartDataPoint } from '@/app/dashboard/project-chart/project-chart.interface';
 import type { ProjectStatsProps } from '@/app/dashboard/project-stats/project-stats.interface';
 
-export const PROJECT_STATS_DATA: ProjectStatsProps[] = [
-  {
-    id: 1,
-    content: '92',
-    label: 'Active Projects',
-    bgColor: 'bg-violet-300',
-    icon: '/images/icons/project-stats-icons/active-projects.svg',
-  },
-  {
-    id: 2,
-    content: '35',
-    label: 'Active Projects',
-    bgColor: 'bg-yellow-300',
-    icon: '/images/icons/project-stats-icons/ongoing-projects.svg',
-  },
-  {
-    id: 3,
-    content: '19h 9m',
-    label: 'Active Projects',
-    bgColor: 'bg-pink-300',
-    icon: '/images/icons/project-stats-icons/working-hours.svg',
-  },
-];
+export function getProjectStatsFromChart(data: ChartDataPoint[]): ProjectStatsProps[] {
+  if (!data.length) {
+    throw new Error('Empty data');
+  }
+  let total = 0;
+  let max = data[0];
+  let min = data[0];
+  for (const point of data) {
+    total += point.value;
+    if (point.value > max.value) max = point;
+    if (point.value < min.value) min = point;
+  }
+  return [
+    {
+      id: 'total',
+      content: String(total),
+      label: 'Total Projects',
+    },
+    {
+      id: 'best',
+      content: max.period,
+      label: 'First Best Period',
+    },
+    {
+      id: 'worst',
+      content: min.period,
+      label: ' Worst Period',
+    },
+  ];
+}

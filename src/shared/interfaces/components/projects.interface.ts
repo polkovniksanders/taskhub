@@ -3,3 +3,5 @@ export interface ProjectsProps {
   label: string;
   href: string;
 }
+
+export type PeriodKey = 'year' | 'month' | 'week' | 'day';

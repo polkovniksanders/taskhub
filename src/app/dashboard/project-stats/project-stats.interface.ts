@@ -1,7 +1,5 @@
 export interface ProjectStatsProps {
-  id: number;
+  id: string;
   content: string;
   label: string;
-  bgColor: string;
-  icon: string;
 }

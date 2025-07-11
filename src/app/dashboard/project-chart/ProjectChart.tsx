@@ -1,36 +1,31 @@
-import { useState } from 'react';
 import ProjectChartHeader from '@/app/dashboard/project-chart/ProjectChartHeader';
-import type { ChartDataPoint } from '@/app/dashboard/project-chart/project-chart.interface';
-import {
-  dailyData,
-  monthlyData,
-  weeklyData,
-  yearlyData,
-} from '@/app/dashboard/project-chart/data/project-chart-data';
 import Chart from '@/app/dashboard/project-chart/Chart';
 import Card from '@/components/ui/card/Card';
 import type { DropdownProps } from '@/shared/interfaces/commone.interface';
-
-type PeriodKey = 'year' | 'month' | 'week' | 'day';
+import { useAppSelector, useAppDispatch } from '@/store';
+import { selectDataByPeriod, selectSelectedPeriod, setSelectedPeriod } from '@/store/projectsSlice';
+import type { PeriodKey } from '@/shared/interfaces/components/projects.interface';
 
 export default function ProjectChart() {
-  const [selectRange, setSelectRange] = useState<DropdownProps>({
-    label: 'Yearly',
-    value: 'year',
-  });
+  const dispatch = useAppDispatch();
 
-  const dataByPeriod: Record<PeriodKey, ChartDataPoint[]> = {
-    year: yearlyData,
-    month: monthlyData,
-    week: weeklyData,
-    day: dailyData,
+  const selectedPeriod = useAppSelector(selectSelectedPeriod);
+  const dataByPeriod = useAppSelector(selectDataByPeriod);
+
+  const selectRange: DropdownProps = {
+    label: selectedPeriod.charAt(0).toUpperCase() + selectedPeriod.slice(1) + 'ly',
+    value: selectedPeriod,
   };
 
-  const chartData = dataByPeriod[selectRange.value as PeriodKey] || [];
+  const chartData = dataByPeriod[selectedPeriod as PeriodKey] || [];
+
+  const handleChange = (dropdown: DropdownProps) => {
+    dispatch(setSelectedPeriod(dropdown.value as PeriodKey));
+  };
 
   return (
     <Card>
-      <ProjectChartHeader period={selectRange} onChange={setSelectRange} />
+      <ProjectChartHeader period={selectRange} onChange={handleChange} />
       <Chart data={chartData} />
     </Card>
   );
