@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Универсальный дашборд на Next.js
 
-## Getting Started
+Современное и универсальное дашборд-приложение, адаптируемое под любые задачи. Проект разработан в рамках учебного курса и ориентирован на быстрое масштабирование и внедрение новых бизнес-фич.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+[>>> ПОСМОТРЕТЬ ВЖИВУЮ <<<](https://taskhub.berghub.ru)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Технологический стек
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js 15** — SSR/SSG, современная архитектура
+- **React 19**
+- **Tailwind CSS 4** — быстрая стилизация и поддержка тем
+- **react-hook-form** — продвинутые формы и валидация
+- **clsx** — условные классы
+- **lucide-react** — иконки
+- **recharts** — графики и аналитика
+- **next-themes** — поддержка светлой и темной темы
+- **react-simple-toasts** — toast-уведомления
 
-## Learn More
+### Инструменты разработки
 
-To learn more about Next.js, take a look at the following resources:
+- **TypeScript 5+**
+- **ESLint, Prettier** — строгий контроль и автоформатирование кода
+- **PostCSS** — дополнительная обработка CSS
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Быстрый старт
 
-## Deploy on Vercel
+1. **Установите зависимости:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```bash
+    npm install
+    # или pnpm install, yarn install, bun install
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. **Запустите dev-сервер:**
+
+    ```bash
+    npm dev
+    # или pnpm run dev, yarn dev, bun dev
+    ```
+
+3. **Откройте приложение:**
+
+    ```
+    http://localhost:8080
+    ```
+
+4. **Авторизация для тестирования:**
+
+    - Пароль: `12345678`
+    - (Логин — при необходимости, отображается на экране авторизации)
+
+---
+
+## Ключевые возможности
+
+- Гибкая архитектура под задачи аналитики, управления, отчетности
+- Адаптивный UI, поддержка мобильных устройств
+- Быстрое переключение между темной и светлой темой
+- Современные формы и валидация (React Hook Form)
+- Графики и визуализация данных (Recharts)
+- Toast-уведомления, универсальные модальные окна
+
+---
+
+## Структура проекта
+
+- `/app` — страницы и layouts
+- `/components` — переиспользуемые UI-компоненты
+- `/hooks` — кастомные хуки
+- `/public` — статические ресурсы
+- `/styles` — глобальные стили
+
+---
+
+## Дополнительная информация
+
+- Для форматирования кода используйте плагины **ESLint** и **Prettier**.
+- Деплой на любой современный Node.js-хостинг (например, Vercel, Render, Timeweb) — порт по умолчанию: **8080**.
+- Переменные окружения (`.env.local`) — настройте при необходимости (API, ключи и т.д.).
+
+---
+
+## Лицензия
+
+MIT License. Свободное использование, модификация и распространение.
+
+---
