@@ -14,7 +14,7 @@ export default function ProgressBar({ progress }: LastTaskProgressProps) {
         aria-valuenow={safeProgress}
         aria-valuemin={0}
         aria-valuemax={100}
-        className='w-full h-10 rounded-2xl bg-slate-800/10 shadow-sm relative overflow-hidden'
+        className='w-full h-10 rounded-2xl bg-neutral-800/50 shadow-sm relative overflow-hidden'
       >
         <div
           className={`
@@ -25,7 +25,7 @@ export default function ProgressBar({ progress }: LastTaskProgressProps) {
           `}
           style={{ width: `${safeProgress}%` }}
         />
-        <span className='absolute inset-0 flex items-center justify-center font-bold text-base text-slate-800 z-10 pointer-events-none select-none text-shadow'>
+        <span className='absolute inset-0 flex items-center justify-center font-bold text-base  z-10 pointer-events-none select-none text-shadow'>
           {safeProgress === 100 ? 'Done' : `${safeProgress}%`}
         </span>
       </div>
